@@ -1,0 +1,71 @@
+---
+- name: Update and configure LAMP stack
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Update all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: Install LAMP stack and PHP 7.2
+    amazon_linux_extra:
+      name: lamp-mariadb10.2-php7.2 php7.2
+      state: present
+
+  - name: Install Apache and MariaDB
+    yum:
+      name:
+        - httpd
+        - mariadb-server
+      state: present
+
+  - name: Start and enable HTTP server
+    systemd:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: Add ec2-user to apache group
+    user:
+      name: ec2-user
+      groups: apache
+      append: yes
+
+  - name: Set ownership and permissions for /var/www directory
+    file:
+      path: /var/www
+      state: directory
+      owner: ec2-user
+      group: apache
+      mode: '2775'
+      recurse: yes
+
+  - name: Set directory permissions for /var/www
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: '2775'
+    with_fileglob:
+      - /var/www/*
+
+  - name: Set file permissions for /var/www
+    file:
+      path: "{{ item }}"
+      state: file
+      mode: '0664'
+    with_fileglob:
+      - /var/www/*
+
+  - name: Install Git
+    yum:
+      name: git
+      state: present
+
+  - name: Clone repository to /var/www/html
+    git:
+      repo: https://github.com/sharonraju143/AWS-Project.git
+      dest: /var/www/html
+      owner: ec2-user
+      group: apache
