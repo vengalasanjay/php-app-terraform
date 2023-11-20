@@ -10,11 +10,8 @@ resources:
 pool:
   vmImage: ubuntu-latest
 steps:
+-
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: |
-      echo "PR-Title is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.message }}"
-              echo "commitid from pr is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.hash }}"
-              echo "repositoryname from pr is ${{ parameters.prpushtoreleasebranch.repository.full_name }}"
-              echo "repository from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"
+    script: 'echo "repository name from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"'
