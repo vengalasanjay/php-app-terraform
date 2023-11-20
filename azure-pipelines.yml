@@ -2,10 +2,6 @@
 trigger: 
   - master
 
-resources:
-  webhooks:
-    - webhook: prpushtoreleasebranch
-      connection: github.com_vengalasanjay
 
 pool:
   vmImage: ubuntu-latest
