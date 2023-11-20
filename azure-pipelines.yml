@@ -10,4 +10,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'echo "repository name from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
