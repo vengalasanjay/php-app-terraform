@@ -1,6 +1,6 @@
 pr: none
 trigger: 
-  -master
+  - master
 
 resources:
   webhooks:
