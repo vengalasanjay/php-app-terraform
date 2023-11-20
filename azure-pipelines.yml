@@ -1,19 +1,10 @@
-# Disable non-webhook triggers
-trigger: none
-pr: none
-
-# Webhook resource that triggers pipeline
-resources:
-  webhooks:
-    - webhook: WebookDemoTrigger
-      connection: myscforgit    # Incoming webhook service connection name
+trigger:
+- master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-  - bash: |
-      echo "commitid from pr is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.hash }}"
-      echo "repositoryname from pr is ${{ parameters.prpushtoreleasebranch.repository.full_name }}"
-      echo "repository from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"
-    displayName: 'Print PR Parameters'
+- script: echo Hello, this is a basic pipeline triggered by changes to the master branch!
+  displayName: 'Simple Hello World'
+
