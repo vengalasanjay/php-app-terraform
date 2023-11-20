@@ -5,18 +5,15 @@ pr: none
 # Webhook resource that triggers pipeline
 resources:
   webhooks:
-    - webhook: WebookDemoTrigger 
-      connection: myscforgit    ### Incoming webhook service connection name
+    - webhook: WebookDemoTrigger
+      connection: myscforgit    # Incoming webhook service connection name
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-  - 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
+  - bash: |
       echo "commitid from pr is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.hash }}"
-              echo "repositoryname from pr is ${{ parameters.prpushtoreleasebranch.repository.full_name }}"
-              echo "repository from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"
+      echo "repositoryname from pr is ${{ parameters.prpushtoreleasebranch.repository.full_name }}"
+      echo "repository from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"
+    displayName: 'Print PR Parameters'
