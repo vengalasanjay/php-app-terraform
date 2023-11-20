@@ -10,6 +10,10 @@ steps:
         targetType: 'inline'
         script: |
           # Get the commit ID of the latest commit
+          git config --global user.email "you@example.com"
+          git config --global user.name "sanjay"
+
+
           commit_id=$(git log --pretty=format:'%H' -n 1)
            
           echo "The latest commit ID is: $commit_id"
