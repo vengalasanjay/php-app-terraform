@@ -17,6 +17,7 @@ steps:
           commit_id=$(git log --pretty=format:'%H' -n 1)
            
           echo "The latest commit ID is: $commit_id"
+          git clone https://github.com/vengalasanjay/php-app-terraform.git
           git checkout testing
           git cherry-pick $commit_id
 
