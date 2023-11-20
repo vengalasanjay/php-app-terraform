@@ -5,6 +5,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, this is a basic pipeline triggered by changes to the master branch!
-  displayName: 'Simple Hello World'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Get the commit ID of the latest commit
+          commit_id=$(git log --pretty=format:'%H' -n 1)
+           
+          echo "The latest commit ID is: $commit_id"
+
 
