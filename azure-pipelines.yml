@@ -1,16 +1,19 @@
-trigger:
-  - master
+pr: none
+trigger: none
+
+resources:
+  webhooks:
+    - webhook: prpushtoreleasebranch
+      connection: github.com_vengalasanjay
 
 pool:
   vmImage: ubuntu-latest
-
-jobs:
-  - job: PrintPayload
-    displayName: 'Print GitHub Payload'
-    steps:
-      - checkout: self
-
-      - script: |
-          echo "Received GitHub webhook payload:"
-          echo $(cat $env:SYSTEM_PULLREQUEST_TARGETBRANCH)  # Print the payload data
-        displayName: 'Print Payload'
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "PR-Title is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.message }}"
+              echo "commitid from pr is ${{ parameters.prpushtoreleasebranch.push.changes[0].new.target.hash }}"
+              echo "repositoryname from pr is ${{ parameters.prpushtoreleasebranch.repository.full_name }}"
+              echo "repository from pr is ${{ parameters.prpushtoreleasebranch.repository.name }}"
