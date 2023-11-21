@@ -5,8 +5,8 @@ pr: none
 # Webhook resource that triggers pipeline
 resources:
   webhooks:
-    - webhook: githubincoming           ### Webhook name
-      connection: githubservice    ### Incoming webhook service connection name
+    - webhook: gitwebhook           ### Webhook name
+      connection: githubsservice    ### Incoming webhook service connection name
 
 pool:
   vmImage: ubuntu-latest
