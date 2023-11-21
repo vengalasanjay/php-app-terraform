@@ -26,7 +26,7 @@
       name: httpd
       state: started
       enabled: yes
-############################################################33
+#####################################################################3
   - name: Add ec2-user to apache group
     user:
       name: ec2-user
