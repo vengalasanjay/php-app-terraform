@@ -5,17 +5,11 @@ pr: none
 # Webhook resource that triggers pipeline
 resources:
   webhooks:
-    - webhook: mygithook           ### Webhook name
+    - webhook: githook           ### Webhook name
       connection: mygitsc    ### Incoming webhook service connection name
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-      # Write parameters from webhook payload to console
-      Write-Host ${{ parameters.WebookDemoTrigger.app_name }}
-      Write-Host ${{ parameters.WebookDemoTrigger.environment }} 
+steps:  
+- script: echo ${{ parameters.WebHook.resource.message.title }}
