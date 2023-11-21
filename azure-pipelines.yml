@@ -1,24 +1,21 @@
-trigger:
-- master
+# Disable non-webhook triggers
+trigger: none
+pr: none
+
+# Webhook resource that triggers pipeline
+resources:
+  webhooks:
+    - webhook: mygithook           ### Webhook name
+      connection: mygitsc    ### Incoming webhook service connection name
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
 steps:
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Get the commit ID of the latest commit
-          git config --global user.email "you@example.com"
-          git config --global user.name "sanjay"
-
-
-          commit_id=$(git log --pretty=format:'%H' -n 1)
-           
-          echo "The latest commit ID is: $commit_id"
-          git clone https://github.com/vengalasanjay/php-app-terraform.git
-          git checkout testing
-          git cherry-pick $commit_id
-
-
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Write parameters from webhook payload to console
+      Write-Host ${{ parameters.WebookDemoTrigger.app_name }}
+      Write-Host ${{ parameters.WebookDemoTrigger.environment }} 
