@@ -26,4 +26,4 @@ steps:
       az extension update --name azure-devops
       echo "$(azurepat)" | az devops login --organization https://dev.azure.com/sriajay/
             
-          az devops service-endpoint show --id f6f86d7a-8978-4e32-9f24-f7bd962d63e5
+          az devops service-endpoint show --id f6f86d7a-8978-4e32-9f24-f7bd962d63e5 -p Autocascading
