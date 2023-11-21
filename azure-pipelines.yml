@@ -5,11 +5,11 @@ pr: none
 # Webhook resource that triggers pipeline
 resources:
   webhooks:
-    - webhook: githook           ### Webhook name
-      connection: mygitsc    ### Incoming webhook service connection name
+    - webhook: githubincoming           ### Webhook name
+      connection: githubservice    ### Incoming webhook service connection name
 
 pool:
   vmImage: ubuntu-latest
 
 steps:  
-- script: echo ${{ parameters.WebHook.resource.message.title }}
+- script: echo "${{ parameters.WebHook.resource.message.title }}"
