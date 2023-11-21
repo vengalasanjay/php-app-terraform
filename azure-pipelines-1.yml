@@ -22,5 +22,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo "$()" | az devops login --organization https://dev.azure.com/sriajay/
+      echo "$(azurepat)" | az devops login --organization https://dev.azure.com/sriajay/
               az devops service connection list --query "[?type=='incomingwebhook'].url
