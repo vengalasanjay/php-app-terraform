@@ -22,5 +22,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      az extension add --name azure-devops
+      az extension update --name azure-devop
       echo "$(azurepat)" | az devops login --organization https://dev.azure.com/sriajay/
+            
             az devops service connection list --query "[?type=='incomingwebhook'].url"
