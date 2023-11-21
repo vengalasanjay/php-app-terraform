@@ -1,4 +1,4 @@
-# Create EC2 instance
+################## Create EC2 instance
 resource "aws_instance" "instance" {
   ami = "ami-04581fbf744a7d11f"
   instance_type = "t2.micro"
