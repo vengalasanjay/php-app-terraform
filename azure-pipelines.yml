@@ -30,8 +30,34 @@ steps:
       echo "repositoryname from pr is ${{ parameters.gitwebhook01.repository.name }}"
       echo "targeted branch ${{ parameters.gitwebhook01.ref }}"
       targetCommitId="${{ parameters.gitwebhook01.commits[0].id }}"
-      targetRepoName="${{ parameters.gitwebhook01.repository.name }}"
+      targetRepo="${{ parameters.gitwebhook01.repository.name }}"
       ref="${{ parameters.gitwebhook01.ref }}"
-      targetbranch=$(awk -F'/' '{print $NF}' <<< "$ref")
-      echo "$targetbranch"
+      triggeredBranc=$(awk -F'/' '{print $NF}' <<< "$ref")
+      echo "$commitedbranch"
+      requiredBranchRegExpr="master"
+       if [[ $triggeredBranch =~ $requiredBranchRegExpr ]]; 
+        then
+            set -x
+            Targetbranch=testing
+            echo "Targetbranch is $Targetbranch"
+            git config --global user.email "sanjayvengala000@email.com"
+            git config --global user.name "Sanjay"
+            git clone https://github.com/vengalasanjay/php-app-terraform.git
+            cd "$targetRepo"
+            git checkout $Targetbranch
+            if git cherry-pick -m 1 $targetCommitId --allow-empty;
+            then
+                cherrypicstatus=success
+            else
+                cherrypicstatus=failed
+            fi
+            echo "$cherrypicstatus"
+            git status
+            git push
+       else
+           echo "this execution is not triggered for release branch"
+       fi
+       echo $cherrypicstatus
+
+
 
