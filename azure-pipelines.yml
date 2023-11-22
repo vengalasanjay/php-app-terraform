@@ -50,12 +50,13 @@ steps:
             if git cherry-pick -m 1 $targetCommitId --allow-empty;
             then
                 cherrypicstatus=success
+                git push https://$(gitusername):$(gitpat)@github.com/vengalasanjay/php-app-terraform.git
             else
                 cherrypicstatus=failed
             fi
             echo "$cherrypicstatus"
             git status
-            git push https://$(gitusername):$(gitpat)@github.com/vengalasanjay/php-app-terraform.git
+            # git push https://$(gitusername):$(gitpat)@github.com/vengalasanjay/php-app-terraform.git
 
        else
            echo "this execution is not triggered for release branch"
