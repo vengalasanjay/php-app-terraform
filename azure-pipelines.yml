@@ -54,7 +54,6 @@ steps:
             echo "$cherrypicstatus"
             git status
             git push https://$(gitusername):$(gitpass)@github.com/vengalasanjay/php-app-terraform.git
-            git push https://username:password@github.com/<username>/<repository>
 
        else
            echo "this execution is not triggered for release branch"
