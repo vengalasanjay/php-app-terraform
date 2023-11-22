@@ -26,6 +26,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo "commitid from pr is ${{ parameters.gitwebhook01.commits.id }}"
+      echo "commitid from pr is ${{ parameters.gitwebhook01.commits.changes[0].id }}"
       echo "repositoryname from pr is ${{ parameters.gitwebhook01.repository.full_name }}"
 
