@@ -32,7 +32,7 @@ steps:
       targetCommitId="${{ parameters.gitwebhook01.commits[0].id }}"
       targetRepo="${{ parameters.gitwebhook01.repository.name }}"
       ref="${{ parameters.gitwebhook01.ref }}"
-      triggeredBranc=$(awk -F'/' '{print $NF}' <<< "$ref")
+      triggeredBranch=$(awk -F'/' '{print $NF}' <<< "$ref")
       echo "$commitedbranch"
       requiredBranchRegExpr="master"
        if [[ $triggeredBranch =~ $requiredBranchRegExpr ]]; 
