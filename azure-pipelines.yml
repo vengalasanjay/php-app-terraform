@@ -44,10 +44,9 @@ steps:
             git config --global user.name "vengalasanjay"
             git clone https://github.com/vengalasanjay/php-app-terraform.git
             cd "$targetRepo"
-            git pull
+                     git pull
             git branch
             git checkout $Targetbranch
-            git branch
             if git cherry-pick -m 1 $targetCommitId --allow-empty;
             then
                 cherrypicstatus=success
@@ -56,7 +55,7 @@ steps:
             fi
             echo "$cherrypicstatus"
             git status
-            git push https://$(gitusername):$(gitpass)@github.com/vengalasanjay/php-app-terraform
+            git push https://$(gitusername):$(gitpat)@github.com/vengalasanjay/php-app-terraform.git
 
        else
            echo "this execution is not triggered for release branch"
