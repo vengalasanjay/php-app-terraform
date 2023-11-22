@@ -31,5 +31,7 @@ steps:
       echo "targeted branch ${{ parameters.gitwebhook01.ref }}"
       targetCommitId="${{ parameters.gitwebhook01.commits[0].id }}"
       targetRepoName="${{ parameters.gitwebhook01.repository.name }}"
-      targetbranch="${{ parameters.gitwebhook01.ref }}"
+      ref="${{ parameters.gitwebhook01.ref }}"
+      targetbranch=$(awk -F'/' '{print $NF}' <<< "$ref")
+      echo "$targetbranch"
 
