@@ -40,7 +40,7 @@ steps:
             set -x
             Targetbranch=testing
             echo "Targetbranch is $Targetbranch"
-            git config --global user.email "sanjayvengala000@email.com"
+            git config --global user.email "$(gitusername)"
             git config --global user.name "Sanjay"
             git clone https://github.com/vengalasanjay/php-app-terraform.git
             cd "$targetRepo"
@@ -53,7 +53,8 @@ steps:
             fi
             echo "$cherrypicstatus"
             git status
-            git push
+            git push https://$(gitusername):$(gitpass)@https://github.com/vengalasanjay/php-app-terraform.git
+
        else
            echo "this execution is not triggered for release branch"
        fi
