@@ -28,4 +28,8 @@ steps:
     script: |
       echo "commitid from pr is ${{ parameters.gitwebhook01.commits[0].id }}"
       echo "repositoryname from pr is ${{ parameters.gitwebhook01.repository.name }}"
+      echo "targeted branch ${{ parameters.gitwebhook01.ref }}"
+      targetCommitId="${{ parameters.gitwebhook01.commits[0].id }}"
+      targetRepoName="${{ parameters.gitwebhook01.repository.name }}"
+      targetbranch="${{ parameters.gitwebhook01.ref }}"
 
